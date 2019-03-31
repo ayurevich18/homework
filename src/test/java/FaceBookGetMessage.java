@@ -28,7 +28,7 @@ public class FaceBookGetMessage {
     }
    @Test
     public void getLastMessage(){
-        MainPage mainPage=loginPage.loginUser("380634564756","11021997yuliadorn");
+        MainPage mainPage=loginPage.loginUser("********","********");
         mainPage.clickMessageButton();
         messagePage.getMessage();
 

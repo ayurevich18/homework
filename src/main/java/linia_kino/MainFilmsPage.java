@@ -13,9 +13,20 @@ public class MainFilmsPage {
         this.driver = driver;
     }
 
-    private By AllFilms =By.xpath("//*[@id=\"content-inner\"]//a/img"); //*[@class="movie"]
+    private By AllFilms = By.xpath("//*[@class=\"movie\"]"); //*[@class="movie"]  //*[@id="content-inner"]//a/img
 
-    public List<WebElement> getAllFilms(){
+    public List<WebElement> getAllFilms() {
         return driver.findElements(AllFilms);
     }
+
+    public void clickOnFilm() {
+        for (int i = 0; i < getAllFilms().size(); i++) {
+            System.out.println(getAllFilms().get(i).getText());
+            if (getAllFilms().get(i).getText().equals("Дамбо")) {
+                getAllFilms().get(i).click();
+            }
+        }
+    }
+
+
 }

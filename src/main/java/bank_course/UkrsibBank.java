@@ -8,27 +8,28 @@ import java.util.List;
 
 public class UkrsibBank {
     private WebDriver driver;
-    public UkrsibBank (WebDriver driver){
-        this.driver=driver;
+
+    public UkrsibBank(WebDriver driver) {
+        this.driver = driver;
     }
 
-    private By usdCurse=By.xpath("//tr[1]/td[child::span[contains(text(), *)]]");
+    private By usdCurse = By.xpath("//tr[1]/td[child::span[contains(text(), *)]]");
 
-    public List<WebElement>getUkrsibCurse(){
+    public List<WebElement> getUkrsibCurse() {
         driver.get("https://my.ukrsibbank.com/ru/personal/operations/currency_exchange/");
         return driver.findElements(usdCurse);
     }
 
-    public void displayUkrsibCurese(){
-        String a=getUkrsibCurse().get(0).getText();
-        String b=getUkrsibCurse().get(1).getText();
-
-        System.out.println("Buy course: "+a);
-        System.out.println("Sell course: "+b);
-
-
-        Double buyCourse=Double.valueOf(a);
-        Double sellCourse=Double.valueOf(b);
-
+    public Double UkrsibBuy() {
+        String a = getUkrsibCurse().get(0).getText();
+        return Double.valueOf(a);
     }
+
+    public Double UkrsibSell() {
+        String b = getUkrsibCurse().get(1).getText();
+        return Double.valueOf(b);
+    }
+
+
 }
+

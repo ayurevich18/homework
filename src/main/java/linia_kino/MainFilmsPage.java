@@ -13,7 +13,7 @@ public class MainFilmsPage {
         this.driver = driver;
     }
 
-    private By AllFilms = By.xpath("//*[@class=\"movie\"]"); //*[@class="movie"]  //*[@id="content-inner"]//a/img
+    private By AllFilms = By.xpath("//*[@class=\"movie\"]");
 
     public List<WebElement> getAllFilms() {
         return driver.findElements(AllFilms);

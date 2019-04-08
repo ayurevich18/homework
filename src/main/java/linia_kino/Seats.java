@@ -16,8 +16,6 @@ public class Seats {
 
     private By emptySeat = By.xpath("//*[@class=\"seat seat-color1\"]");
     private By ocuppiedSeat = By.xpath("//*[@class=\"seat seat-occupied\"]");
-//    private By closeButton=By.xpath("/html/body/div[4]/table/tbody/tr/td/div/div");
-//    private By iframe=By.cssSelector("iframe");
 
 
     public void closeAlert() {
@@ -46,8 +44,8 @@ public class Seats {
         int emptySeats = getEmptySeats().size();
         int occupied = getOcuppiedSeats().size();
         int sum = emptySeats + occupied;
-        double percentageEmptySeats = emptySeats * 100/sum;
-        double percentageOcuppied = occupied * 100/sum;
+        double percentageEmptySeats = emptySeats * 100 / sum;
+        double percentageOcuppied = occupied * 100 / sum;
         System.out.println("All seats in space: " + sum);
         System.out.println("Qty occupied seats: " + occupied);
         System.out.println("Qty empty seats: " + emptySeats);

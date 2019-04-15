@@ -12,10 +12,10 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Akinator {
-    public static void main(String[] args) throws InterruptedException, Throwable {
-        System.setProperty("webdriver.chrome.driver", "/Users/yurevycho/Downloads/chromedriver");
+    public static void main(String[] args) throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "/Users/alekseyyurevich/Downloads/chromedriver");
         WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
         driver.manage().window().fullscreen();
 
         //start game
@@ -23,27 +23,24 @@ public class Akinator {
         driver.findElement(By.xpath("//*[@class='btn-play']")).click();
 
         do {
-            try {
-                if (driver.findElement(By.xpath("//*[@class='bubble-propose-container']")).isDisplayed()) {
-                    System.out.print("Я ДУМАЮ ЭТО " + driver.findElement(By.xpath("//*[@class=\"proposal-title\"]")));
+            List<WebElement> a = driver.findElements(By.xpath("//*[@class='bubble-propose-container']"));
+            if (a.size() > 0) {
+                if (a.get(0).isDisplayed()) {
+                    System.out.print("Я ДУМАЮ ЭТО " + a.get(0).getText());
                     driver.quit();
                     break;
                 }
-            } catch (Throwable ex) {
-                ex.fillInStackTrace();
-                System.out.println("");
-
             }
 
-            Thread.sleep(5000);
+            Thread.sleep(2000);
             System.out.println(driver.findElement(By.xpath("//*[@class='question-text']")).getText());
-            List<WebElement> answer = driver.findElements(By.xpath("//*[@class=\"database-selection selector dialog-box\"]//li"));
+            List<WebElement> answer = driver.findElements(By.xpath("//*[@class='database-selection selector dialog-box']//li"));
             for (int i = 0; i < answer.size(); i++) {
                 System.out.print(i + 1 + " - ");
                 System.out.println(answer.get(i).getText());
 
             }
-            System.out.print("");
+            System.out.print(" ");
             System.out.println("Введите ответ и нажмите Enter");
             Scanner scanner = new Scanner(System.in);
             int number = scanner.nextInt();
@@ -70,4 +67,5 @@ public class Akinator {
 
 
     }
+
 }

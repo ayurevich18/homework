@@ -19,13 +19,13 @@ public class Imdb {
     private By rateFilm = By.xpath("//*[@itemprop='ratingValue']");
     private By rateFilm1 = By.xpath("//*[@itemprop='bestRating']");
     private By genre = By.xpath("//*[@class='subtext']/a[1]");
-    private By posterUrl = By.xpath("//*[@class=\"poster\"]//img");
+    private By posterUrl = By.xpath("//*[@class='poster']//img");
     private By videoUrl = By.xpath("//*[@alt='Trailer']");
-    private By directorname = By.xpath("//*[@id='title-overview-widget']/div[2]/div[1]/div[2]/a");
+    private By directorname = By.cssSelector(".credit_summary_item:nth-child(2)>a");
     private By actors = By.xpath("//tbody//td[2]/a");
     private By metascore = By.xpath("//*[@class='titleReviewBar ']//div[1]/span");
     private By qtyReviews = By.xpath("//*[@class='subText']/a"); //use 2(users) //3 critics //sum
-    private By nameLikeFilm= By.xpath("//*[@id='title_recs']//img");
+    private By nameLikeFilm = By.xpath("//*[@id='title_recs']//img");
 
     public void displayFilmName() {
 
@@ -97,20 +97,20 @@ public class Imdb {
     }
 
     public void displayReviews() {
-        String a=(getReviews().get(1).getText());
-        int userReviews=Integer.parseInt(a.substring(0,1)+a.substring(2,5));
-        System.out.println("User reviews: "+userReviews);
-        int critic=Integer.parseInt((getReviews().get(2).getText().substring(0,3)));
-        System.out.println("Critic reviews: "+critic);
-        int sumReviews=userReviews+critic;
-        System.out.println("Sum all reviews: "+sumReviews);
+        String a = (getReviews().get(1).getText());
+        int userReviews = Integer.parseInt(a.substring(0, 1) + a.substring(2, 5));
+        System.out.println("User reviews: " + userReviews);
+        int critic = Integer.parseInt((getReviews().get(2).getText().substring(0, 3)));
+        System.out.println("Critic reviews: " + critic);
+        int sumReviews = userReviews + critic;
+        System.out.println("Sum all reviews: " + sumReviews);
     }
 
-    public List<WebElement> getLikefilms(){
+    public List<WebElement> getLikefilms() {
         return driver.findElements(nameLikeFilm);
     }
 
-    public void displayLikeFilms(){
+    public void displayLikeFilms() {
         for (int i = 0; i < 3; i++) {
             System.out.println("Like films: " + getLikefilms().get(i).getAttribute("title"));
         }

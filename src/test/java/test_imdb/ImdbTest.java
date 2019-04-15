@@ -21,9 +21,9 @@ public class ImdbTest {
 
     @BeforeClass
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "/Users/yurevycho/Downloads/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/Users/alekseyyurevich/Downloads/chromedriver");
         driver= new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
         driver.get("https://www.imdb.com/title/tt0111161/");
         imdb=new Imdb(driver);
 

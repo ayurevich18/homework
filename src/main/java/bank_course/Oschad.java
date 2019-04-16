@@ -11,8 +11,8 @@ public class Oschad {
         this.driver = driver;
     }
 
-    private By buyUsd = By.xpath("//*[@class=\"buy-USD\"]");
-    private By sellUsd = By.xpath("//*[@class=\"sell-USD\"]");
+    private By buyUsd = By.xpath("//*[@class='buy-USD']");
+    private By sellUsd = By.xpath("//*[@class='sell-USD']");
 
     public String getCurseBuy() {
 
@@ -26,12 +26,12 @@ public class Oschad {
 
     }
 
-    public Double OschadBuy() {
+    public double oschadBuy() {
         return Double.valueOf(getCurseBuy());
 
     }
 
-    public Double OschadSell() {
+    public double oschadSell() {
         return Double.valueOf(getCurseSell());
 
     }

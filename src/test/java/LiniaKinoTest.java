@@ -1,4 +1,3 @@
-import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import linia_kino.FilmViewFilm;
 import linia_kino.MainFilmsPage;
@@ -26,15 +25,16 @@ public class LiniaKinoTest {
         driver.get("http://liniakino.com/");
         mainFilmsPage = new MainFilmsPage(driver);
         filmViewFilm = new FilmViewFilm(driver);
-        seats = new Seats(driver);
-        showtimes = new Showtimes(driver);
+        showtimes=new Showtimes(driver);
+        seats=new Seats(driver);
+
 
     }
 
     @Test
-    public void get() {
-        mainFilmsPage.clickOnFilm();
-        filmViewFilm.goToPage();
+    public void getEmptyOcuppiedSeats() {
+        mainFilmsPage.clickOnFilm("Дамбо");
+        filmViewFilm.goToPageShowtimes();
         showtimes.selectPlace();
         seats.closeAlert();
         seats.dispalyOnConsole();

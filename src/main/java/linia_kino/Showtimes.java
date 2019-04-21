@@ -10,7 +10,7 @@ public class Showtimes {
         this.driver = driver;
     }
 
-    private By selectTime = By.xpath("//*[@id=\"content-inner\"]/div/ul/li/div[2]/div[1]/div[1]/ul/li[1]/a");
+    private By selectTime = By.xpath("//div[@class='showtime']/div[1]/div[1]//a");
 
     public Seats selectPlace() {
         driver.findElement(selectTime).click();

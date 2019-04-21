@@ -14,14 +14,14 @@ public class Seats {
         this.driver = driver;
     }
 
-    private By emptySeat = By.xpath("//*[@class=\"seat seat-color1\"]");
-    private By ocuppiedSeat = By.xpath("//*[@class=\"seat seat-occupied\"]");
+    private By emptySeat = By.xpath("//*[@class='seat seat-color1']");
+    private By ocuppiedSeat = By.xpath("//*[@class='seat seat-occupied']");
 
 
     public void closeAlert() {
         WebElement iframeElem = driver.findElement(By.cssSelector("iframe"));
         driver.switchTo().frame(iframeElem);
-        WebElement element = driver.findElement(By.xpath("/html/body/div[4]/table/tbody/tr/td/div/div"));
+        WebElement element = driver.findElement(By.xpath("//*[@class='window-close arcticmodal-close']"));
         Actions actions = new Actions(driver);
         actions.moveToElement(element).click().perform();
     }

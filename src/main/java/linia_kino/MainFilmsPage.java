@@ -13,16 +13,16 @@ public class MainFilmsPage {
         this.driver = driver;
     }
 
-    private By AllFilms = By.xpath("//*[@class=\"movie\"]");
+    private By AllFilms = By.xpath("//*[@class='movie']");
 
     public List<WebElement> getAllFilms() {
         return driver.findElements(AllFilms);
     }
 
-    public void clickOnFilm() {
+    public void clickOnFilm(String film) {
         for (int i = 0; i < getAllFilms().size(); i++) {
             System.out.println(getAllFilms().get(i).getText());
-            if (getAllFilms().get(i).getText().equals("Дамбо")) {
+            if (getAllFilms().get(i).getText().equals(film)) {
                 getAllFilms().get(i).click();
             }
         }

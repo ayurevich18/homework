@@ -10,9 +10,9 @@ public class FilmViewFilm {
         this.driver = driver;
     }
 
-    private By buyButton = By.xpath("//*[@class=\"button inline\"]");
+    private By buyButton = By.xpath("//*[@class='button inline']");
 
-    public Showtimes goToPage() {
+    public Showtimes goToPageShowtimes() {
         driver.findElement(buyButton).click();
         return new Showtimes(driver);
     }

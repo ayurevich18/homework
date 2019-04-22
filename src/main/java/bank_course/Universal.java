@@ -19,10 +19,12 @@ public class Universal {
 
     private By usdCurse = By.xpath("//*[@class='p-b-xs-2 p-y-1-sm']");
 
+
     public List<WebElement> getUniversalCurse() {
         WebDriverWait wait = new WebDriverWait(driver, 4);
         driver.get("https://www.universalbank.com.ua/");
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(usdCurse));
+
+       wait.until(ExpectedConditions.invisibilityOfElementLocated(usdCurse));
         return driver.findElements(usdCurse);
     }
 

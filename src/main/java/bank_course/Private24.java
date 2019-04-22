@@ -18,10 +18,11 @@ public class Private24 {
 
     private By usdCurse = By.xpath("//*[@class='section-content rate']");
 
+    WebDriverWait wait = new WebDriverWait(driver, 4);
     public List<WebElement> getPrivateCurse() {
-        WebDriverWait wait = new WebDriverWait(driver, 4);
+
         driver.get("https://www.privat24.ua/");
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(usdCurse));
+      wait.until(ExpectedConditions.invisibilityOfElementLocated(usdCurse));
         return driver.findElements(usdCurse);
     }
 

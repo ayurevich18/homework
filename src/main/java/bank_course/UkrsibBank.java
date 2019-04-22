@@ -15,7 +15,8 @@ public class UkrsibBank {
         this.driver = driver;
     }
 
-    private By usdCurse = By.xpath("//tr[1]/td[child::span[contains(text(), *)]]");
+    private By usdCurse = By.xpath("//*[@class='mobile-curr-name']/..");
+
 
     public List<WebElement> getUkrsibCurse() {
         WebDriverWait wait = new WebDriverWait(driver, 4);

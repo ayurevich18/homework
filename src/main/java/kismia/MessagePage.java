@@ -19,12 +19,9 @@ public class MessagePage extends BasePage {
     private By writeMessageButton = By.cssSelector(" div.grid__card-content > div > div > ul > li:nth-child(1) > a");
     private By messageInput = By.cssSelector("#form-compose > textarea");
     private By sendMessageButton = By.cssSelector("#form-compose > div.chat-controls-buttons > label > button");
-    private By dialogPopUp = By.cssSelector("#dialog-form>div>div>a");
 
 
-    public void startMessage()  {
-
-//        clickOn(dialogPopUp);
+    public void startMessage() {
         clickOn(suitable);
         clickOn(moreButton);
         clickOn(writeMessageButton);

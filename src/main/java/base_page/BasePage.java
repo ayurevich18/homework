@@ -23,8 +23,8 @@ public class BasePage {
 
     public List<WebElement> finds(By element) {
 
-            WebDriverWait wait = new WebDriverWait(driver, 5);
-            wait.until(ExpectedConditions.presenceOfElementLocated(element));
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(element));
 
         return driver.findElements(element);
     }
@@ -52,8 +52,8 @@ public class BasePage {
         elem.click();
     }
 
-    public void selectDefaultDropDown(String value,By element){
-        WebElement element1=find(element);
+    public void selectDefaultDropDown(String value, By element) {
+        WebElement element1 = find(element);
         Select day = new Select(element1);
         day.selectByValue(value);
 

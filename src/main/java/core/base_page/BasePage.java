@@ -1,4 +1,4 @@
-package base_page;
+package core.base_page;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;

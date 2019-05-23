@@ -4,9 +4,11 @@ import bank_course.Oschad;
 import bank_course.Private24;
 import bank_course.UkrsibBank;
 import bank_course.Universal;
+import core.DriverEventListener;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -14,8 +16,11 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BankGetCurse {
     private WebDriver driver;
@@ -29,6 +34,7 @@ public class BankGetCurse {
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        driver = new EventFiringWebDriver(driver).register(new DriverEventListener());
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         private24 = new Private24(driver);
         oschad = new Oschad(driver);
@@ -42,6 +48,7 @@ public class BankGetCurse {
         driver.get("https://www.oschadbank.ua/ua");
         buyCourse.add(oschad.OschadBuy());
         buyCourse.add(private24.PrivateBuy());
+        driver.get("https://my.ukrsibbank.com/ru/personal/operations/currency_exchange/");
         buyCourse.add(ukrsibBank.UkrsibBuy());
         buyCourse.add(universal.UniversalBuy());
         double average = (buyCourse.get(0) + buyCourse.get(1) + buyCourse.get(2) + buyCourse.get(3)) / buyCourse.size();
@@ -56,12 +63,23 @@ public class BankGetCurse {
         driver.get("https://www.oschadbank.ua/ua");
         sellCourse.add(oschad.OschadSell());
         sellCourse.add(private24.PrivateSell());
+        driver.get("https://my.ukrsibbank.com/ru/personal/operations/currency_exchange/");
         sellCourse.add(ukrsibBank.UkrsibSell());
         sellCourse.add(universal.UniversalSell());
         double average = (sellCourse.get(0) + sellCourse.get(1) + sellCourse.get(2) + sellCourse.get(3)) / sellCourse.size();
         System.out.println("Average sell course: " + average);
         Collections.sort(sellCourse);
         System.out.println("Bank with high course: " + sellCourse.get(3));
+
+    }
+
+    @Test
+    public void getS(){
+        driver.get("https://www.oschadbank.ua/ua");
+        for(String i:oschad.getCurseSell()){
+            System.out.println(i);
+        }
+
 
     }
 

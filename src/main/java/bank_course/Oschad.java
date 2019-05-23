@@ -3,6 +3,11 @@ package bank_course;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class Oschad {
     private WebDriver driver;
@@ -11,28 +16,52 @@ public class Oschad {
         this.driver = driver;
     }
 
-    private By buyUsd = By.xpath("//*[@class=\"buy-USD\"]");
-    private By sellUsd = By.xpath("//*[@class=\"sell-USD\"]");
 
-    public String getCurseBuy() {
+    public List<String> getCurseBuy() {
 
-        return driver.findElement(buyUsd).getText();
+        String a = getPageSoursOschad();
+
+        Pattern pattern = Pattern.compile("(data-buy.+)");
+        Matcher matcher = pattern.matcher(a);
+        List<String> course = new LinkedList<String>();
+        while (matcher.find()) {
+            course.add(a.substring(matcher.start(), matcher.end()));
+
+        }
+        return course;
 
     }
 
-    public String getCurseSell() {
+    public List<String> getCurseSell() {
 
-        return driver.findElement(sellUsd).getText();
+        String a = getPageSoursOschad();
+
+        Pattern pattern = Pattern.compile("(data-sell.+)");
+        Matcher matcher = pattern.matcher(a);
+        List<String> course = new LinkedList<String>();
+        while (matcher.find()) {
+            course.add(a.substring(matcher.start(), matcher.end()));
+
+        }
+        return course;
 
     }
+
 
     public Double OschadBuy() {
-        return Double.valueOf(getCurseBuy());
+        String a = getCurseBuy().get(0);
+        return Double.valueOf(a.substring(a.indexOf("=") + 2, a.indexOf(">") - 2));
 
     }
 
     public Double OschadSell() {
-        return Double.valueOf(getCurseSell());
+        String a = getCurseSell().get(0);
+        return Double.valueOf(a.substring(a.indexOf("=") + 2, a.indexOf(">") - 2));
 
+    }
+
+    public String getPageSoursOschad() {
+        String q = driver.getPageSource();
+        return q;
     }
 }

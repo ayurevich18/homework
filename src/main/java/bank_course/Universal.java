@@ -4,7 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Universal {
 
@@ -15,22 +18,32 @@ public class Universal {
         this.driver = driver;
     }
 
-    private By usdCurse = By.xpath("//*[@class=\"p-b-xs-2 p-y-1-sm\"]");
-
-    public List<WebElement> getUniversalCurse() {
-        driver.get("https://www.universalbank.com.ua/");
-
-        return driver.findElements(usdCurse);
-    }
-
     public Double UniversalBuy() {
-        String a = getUniversalCurse().get(4).getText();
+        String a = getCourse("[0-9].\\.[0-9].").get(1);
         return Double.valueOf(a);
     }
 
     public Double UniversalSell() {
-        String b = getUniversalCurse().get(5).getText();
+        String b = getCourse("[0-9].\\.[0-9].").get(2);
         return Double.valueOf(b);
     }
 
+    private String getPageSourseUkrBank() {
+        String q = driver.getPageSource();
+        return q;
+    }
+
+    private List<String> getCourse(String patterns) {
+        String a = getPageSourseUkrBank();
+
+        Pattern pattern = Pattern.compile(patterns);
+        Matcher matcher = pattern.matcher(a);
+        List<String> course = new LinkedList<String>();
+        while (matcher.find()) {
+            course.add(a.substring(matcher.start(), matcher.end()));
+
+        }
+        return course;
+
+    }
 }

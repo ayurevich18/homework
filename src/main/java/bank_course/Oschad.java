@@ -17,51 +17,35 @@ public class Oschad {
     }
 
 
-    public List<String> getCurseBuy() {
-
-        String a = getPageSoursOschad();
-
-        Pattern pattern = Pattern.compile("(data-buy.+)");
-        Matcher matcher = pattern.matcher(a);
-        List<String> course = new LinkedList<String>();
-        while (matcher.find()) {
-            course.add(a.substring(matcher.start(), matcher.end()));
-
-        }
-        return course;
-
-    }
-
-    public List<String> getCurseSell() {
-
-        String a = getPageSoursOschad();
-
-        Pattern pattern = Pattern.compile("(data-sell.+)");
-        Matcher matcher = pattern.matcher(a);
-        List<String> course = new LinkedList<String>();
-        while (matcher.find()) {
-            course.add(a.substring(matcher.start(), matcher.end()));
-
-        }
-        return course;
-
-    }
-
-
     public Double OschadBuy() {
-        String a = getCurseBuy().get(0);
+        String a = getCurse("(data-buy.+)").get(0);
         return Double.valueOf(a.substring(a.indexOf("=") + 2, a.indexOf(">") - 2));
 
     }
 
     public Double OschadSell() {
-        String a = getCurseSell().get(0);
+        String a = getCurse("(data-sell.+)").get(0);
         return Double.valueOf(a.substring(a.indexOf("=") + 2, a.indexOf(">") - 2));
 
     }
 
-    public String getPageSoursOschad() {
+    private String getPageSoursOschad() {
         String q = driver.getPageSource();
         return q;
+    }
+
+    private List<String> getCurse(String patterns) {
+
+        String a = getPageSoursOschad();
+
+        Pattern pattern = Pattern.compile(patterns);
+        Matcher matcher = pattern.matcher(a);
+        List<String> course = new LinkedList<String>();
+        while (matcher.find()) {
+            course.add(a.substring(matcher.start(), matcher.end()));
+
+        }
+        return course;
+
     }
 }

@@ -16,24 +16,26 @@ public class UkrsibBank {
         this.driver = driver;
     }
 
-   public List<String> getSellCourse() {
-       String a = getPageSourseUkrBank();
 
-       Pattern pattern = Pattern.compile("Продажа.+[0-6]");
-       Matcher matcher = pattern.matcher(a);
-       List<String> course = new LinkedList<String>();
-       while (matcher.find()) {
-           course.add(a.substring(matcher.start(), matcher.end()));
+    public Double UkrsibBuy() {
+        String a = getCourse("Покупка.+[0-6]").get(0);
+        return Double.valueOf(a.substring(a.indexOf(">") + 1));
+    }
 
-       }
-       return course;
+    public Double UkrsibSell() {
+        String b = getCourse("Продажа.+[0-6]").get(0);
+        return Double.valueOf(b.substring(b.indexOf(">") + 1));
+    }
 
-   }
+    private String getPageSourseUkrBank() {
+        String q = driver.getPageSource();
+        return q;
+    }
 
-    public List<String> getBuyCourse() {
+    private List<String> getCourse(String patterns) {
         String a = getPageSourseUkrBank();
 
-        Pattern pattern = Pattern.compile("Покупка.+[0-6]");
+        Pattern pattern = Pattern.compile(patterns);
         Matcher matcher = pattern.matcher(a);
         List<String> course = new LinkedList<String>();
         while (matcher.find()) {
@@ -42,21 +44,6 @@ public class UkrsibBank {
         }
         return course;
 
-    }
-
-    public Double UkrsibBuy() {
-        String a = getBuyCourse().get(0);
-        return Double.valueOf(a.substring(a.indexOf(">")+1));
-    }
-
-    public Double UkrsibSell() {
-        String b = getSellCourse().get(0);
-        return Double.valueOf(b.substring(b.indexOf(">")+1));
-    }
-
-    public String getPageSourseUkrBank(){
-        String q=driver.getPageSource();
-        return q;
     }
 
 

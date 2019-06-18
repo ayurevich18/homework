@@ -19,7 +19,7 @@ public class Akinator {
 
 
     public static void main(String[] args) throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver", "/Users/alekseyyurevich/Downloads/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/Users/yurevycho/Downloads/chromedriver");
         WebDriver driver = new ChromeDriver();
         driver.manage().window().fullscreen();
         WebDriverWait forOne = new WebDriverWait(driver, 10);
@@ -35,7 +35,7 @@ public class Akinator {
             if (count > 0) {
                 System.out.println(count);
 
-                forOne.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='col-md-12 overlayed']/img")));
+                forOne.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@class='col-md-12 overlayed']/img")));
             }
             List<WebElement> a = driver.findElements(By.xpath("//*[@class='bubble-propose-container']"));
             if (a.size() > 0) {

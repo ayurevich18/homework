@@ -1,6 +1,6 @@
-import loginpage.LoginPage;
-import loginpage.MainPage;
-import loginpage.MessagePage;
+import loginpage_facebook.LoginPage;
+import loginpage_facebook.MainPage;
+import loginpage_facebook.MessagePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,28 +14,29 @@ public class FaceBookGetMessage {
     private MessagePage messagePage;
 
 
-    @BeforeClass
-    public void setUp(){
+    @BeforeTest
+    public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         System.setProperty("webdriver.chrome.driver", "/Users/yurevycho/Downloads/chromedriver");
-        driver= new ChromeDriver(options);
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://www.facebook.com");
-        loginPage= new LoginPage(driver);
-        messagePage= new MessagePage(driver);
+        loginPage = new LoginPage(driver);
+        messagePage = new MessagePage(driver);
 
     }
-   @Test
-    public void getLastMessage(){
-        MainPage mainPage=loginPage.loginUser("********","********");
+
+    @Test
+    public void getLastMessage() {
+        MainPage mainPage = loginPage.loginUser("********", "********");
         mainPage.clickMessageButton();
         messagePage.getMessage();
 
-   }
+    }
 
-   @AfterClass
-    public void tearDown(){
+    @AfterTest
+    public void tearDown() {
         driver.quit();
-   }
+    }
 }
